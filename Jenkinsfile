@@ -8,12 +8,6 @@ environment {
 
 stages {
 
-    stage('Clone Repository') {
-        steps {
-            git branch: 'main', url: 'https://github.com/Mokshith151/docker-Jenkins-ansible1.git'
-        }
-    }
-
     stage('Build Docker Image') {
         steps {
             sh 'docker build -t $DOCKER_IMAGE .'
