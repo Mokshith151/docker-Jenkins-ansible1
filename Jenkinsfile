@@ -15,7 +15,7 @@ stages {
 
     stage('Docker Login') {
         steps {
-            sh 'docker login -u mokshith151 -p YOUR_DOCKERHUB_PASSWORD'
+            sh 'docker login -u mokshith151 -p dckr_pat_zO55XzDcn_fBZli7IJDpqT135Is'
         }
     }
 
