@@ -1,7 +1,6 @@
 pipeline {
 agent any
-
-```
+    
 environment {
     DOCKER_IMAGE = "mokshith151/static-app"
 }
