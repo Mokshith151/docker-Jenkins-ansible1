@@ -1,0 +1,25 @@
+---
+- hosts: worker
+  become: yes
+
+  tasks:
+
+  - name: Install Docker
+    apt:
+      name: docker.io
+      state: present
+      update_cache: yes
+
+  - name: Start Docker
+    service:
+      name: docker
+      state: started
+      enabled: yes
+
+  - name: Pull Docker Image
+    docker_container:
+      name: static-container
+      image: mokshi11/staticapp-ansi:latest
+      state: started
+      ports:
+        - "8005:80"
