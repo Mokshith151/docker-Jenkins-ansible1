@@ -1,25 +1,26 @@
 ---
-- hosts: worker
+- hosts: dev
   become: yes
-
   tasks:
 
-  - name: Install Docker
-    apt:
-      name: docker.io
-      state: present
-      update_cache: yes
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
 
-  - name: Start Docker
-    service:
-      name: docker
-      state: started
-      enabled: yes
+    - name: Start Docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
 
-  - name: Pull Docker Image
-    docker_container:
-      name: static-container
-      image: mokshi11/staticapp-ansi:latest
-      state: started
-      ports:
-        - "8005:80"
+    - name: Stop existing container
+      command: docker rm -f static-container
+      ignore_errors: yes
+
+    - name: Pull Docker Image
+      command: docker pull mokshi11/staticapp-ansi:latest
+
+    - name: Run Container
+      command: docker run -d -p 8005:80 --name static-container mokshi11/staticapp-ansi:latest
